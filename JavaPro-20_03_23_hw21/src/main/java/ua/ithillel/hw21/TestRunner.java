@@ -111,8 +111,11 @@ public class TestRunner {
 		
 		System.out.println("hw21\n");
 		
-		ProjectTestRunner projectTestRunner = new ProjectTestRunner();
-		projectTestRunner.TestExecuteByClassType(SimpleMathLibraryTest.class);
+		ProjectTestRunner<SimpleMathLibraryTest> projectTestRunner = 
+				new ProjectTestRunner<SimpleMathLibraryTest>();
+		
+		projectTestRunner.testExecuteByClassType(
+				SimpleMathLibraryTest.class);
 	}
 
 }
