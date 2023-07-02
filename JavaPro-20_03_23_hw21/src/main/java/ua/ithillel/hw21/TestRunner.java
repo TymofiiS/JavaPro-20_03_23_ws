@@ -105,17 +105,32 @@ Test run finished after 64 ms
 
 package ua.ithillel.hw21;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 public class TestRunner {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		
 		System.out.println("hw21\n");
+	
 		
-		ProjectTestRunner<SimpleMathLibraryTest> projectTestRunner = 
-				new ProjectTestRunner<SimpleMathLibraryTest>();
+		ProjectTestRunner projectTestRunner = 
+				new ProjectTestRunner();
+		
+		projectTestRunner.addWriter(
+				new PrintWriter(System.out));
+		
+		projectTestRunner.addWriter(
+				new PrintWriter(
+						new File("testReport.txt")));
 		
 		projectTestRunner.testExecuteByClassType(
 				SimpleMathLibraryTest.class);
+		
+		projectTestRunner.testExecuteByClassType(
+				EmptyClass.class);
 	}
 
 }

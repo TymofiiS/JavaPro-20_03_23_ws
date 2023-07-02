@@ -28,10 +28,8 @@ import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.junit.platform.launcher.listeners.TestExecutionSummary;
 import org.junit.platform.reporting.legacy.xml.LegacyXmlReportGeneratingListener;
 
-import java.io.File;
-import java.io.FileNotFoundException;  
 
-public class ProjectTestRunner<T> {
+public class ProjectTestRunner {
 	
 	/*
 	 * - для запуску тесту на ім'я класу (рядкове значення)
@@ -40,11 +38,11 @@ public class ProjectTestRunner<T> {
 - для запуску тестів за іменами класів ( тип даних клас)
 - для запуску тестів за розташуванням у пакеті (рядкове значення)
 	 */
-	
-	String fileName = null;
+
 	LauncherDiscoveryRequest request = null;
+	List<PrintWriter> writers = new ArrayList<>();
 	
-	public void testExecuteByClassType(Class<T> type) {
+	public <T> void testExecuteByClassType(Class<T> type) {
 		
 		if(type == null) return;
 		
@@ -56,8 +54,18 @@ public class ProjectTestRunner<T> {
 		
 		printResult();
 	}
+
+	public void addWriter(PrintWriter writer) {
+		if(writer == null) {return;}
+		this.writers.add(writer);
+	}
 	
-	private void printResult() {
+	public void removeWriter(PrintWriter writer) {
+		if(writer == null) {return;}
+		this.writers.remove(writer);
+	}
+
+	private void printResult() {	
 		
 		SummaryGeneratingListener listener = 
 				new SummaryGeneratingListener();
@@ -74,33 +82,24 @@ public class ProjectTestRunner<T> {
 		    launcher.execute(request);
 		}
 
-		TestExecutionSummary summary = listener.getSummary();
-		
-		// Initiate output stream
-		PrintWriter writer = null;
-		try {
-			writer = (fileName == null)
-					?new PrintWriter(System.out)
-					:new PrintWriter(new File(fileName));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		TestExecutionSummary summary = listener.getSummary();	
 		
 		long ellapsedTime = 
 				summary.getTimeFinished() - summary.getTimeStarted();
 		
-		// Shape output
-	    writer.write("Test run finished after " + ellapsedTime + " ms\n"); 
-	    writer.write("[ " + summary.getContainersFoundCount() + " containers found ]\n");
-	    writer.write("[ " + summary.getContainersSkippedCount() + " containers skipped ]\n");
-	    writer.write("[ " + summary.getContainersStartedCount() + " containers started ]\n");
-	    writer.write("[ " + summary.getContainersAbortedCount()+ " containers aborted ]\n");
-	    writer.write("[ " + summary.getContainersSucceededCount() + " containers successful ]\n");
-	    writer.write("[ " + summary.getContainersFailedCount() + " containers failed ]\n");
-	    writer.write("[ " + summary.getTestsFoundCount() + " tests found ]\n");
-	    writer.write("[ " + summary.getTestsSkippedCount() + " tests skip ]\n");
-	    writer.flush();  
-	    writer.close(); 
+		for (PrintWriter writer : writers) {
+		    writer.write("\nTest run finished after " + ellapsedTime + " ms\n"); 
+		    writer.write("[ " + summary.getContainersFoundCount() + " containers found ]\n");
+		    writer.write("[ " + summary.getContainersSkippedCount() + " containers skipped ]\n");
+		    writer.write("[ " + summary.getContainersStartedCount() + " containers started ]\n");
+		    writer.write("[ " + summary.getContainersAbortedCount()+ " containers aborted ]\n");
+		    writer.write("[ " + summary.getContainersSucceededCount() + " containers successful ]\n");
+		    writer.write("[ " + summary.getContainersFailedCount() + " containers failed ]\n");
+		    writer.write("[ " + summary.getTestsFoundCount() + " tests found ]\n");
+		    writer.write("[ " + summary.getTestsSkippedCount() + " tests skip ]\n");
+		    writer.flush();  
+		    //writer.close(); 
+		}
 	}
 	
 }
