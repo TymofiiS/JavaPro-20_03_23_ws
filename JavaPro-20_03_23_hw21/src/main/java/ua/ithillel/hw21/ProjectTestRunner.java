@@ -1,6 +1,7 @@
 package ua.ithillel.hw21;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.platform.engine.discovery.ClassNameFilter.includeClassNamePatterns;
@@ -26,30 +27,64 @@ import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.junit.platform.launcher.listeners.TestExecutionSummary;
-import org.junit.platform.reporting.legacy.xml.LegacyXmlReportGeneratingListener;
-
+import org.junit.platform.engine.DiscoverySelector;
 
 public class ProjectTestRunner {
 	
-	/*
-	 * - для запуску тесту на ім'я класу (рядкове значення)
-- для запуску тесту на ім'я класу (тип даних клас)
-- для запуску тестів за іменами класів (рядкове значення)
-- для запуску тестів за іменами класів ( тип даних клас)
-- для запуску тестів за розташуванням у пакеті (рядкове значення)
-	 */
-
-	LauncherDiscoveryRequest request = null;
-	List<PrintWriter> writers = new ArrayList<>();
+	private LauncherDiscoveryRequest request = null;
+	private List<PrintWriter> writers = new ArrayList<>();
 	
-	public <T> void testExecuteByClassType(Class<T> type) {
+	public <T> void testExecuteByClassTypes(List<Class<T>> types) {			
+		if(types == null || types.size() == 0) 
+			{return;}
 		
-		if(type == null) return;
+		List<String> typeNames = new ArrayList<>();
+		for (Class<T> type : types) {
+			if(type == null) {continue;}
+			typeNames.add(type.getName());
+		}
 		
-		request = LauncherDiscoveryRequestBuilder.request()
-			    .selectors(
-			        selectClass(type)
-			    )
+		testExecuteByClassNames(typeNames);
+	}
+	
+	public <T> void testExecuteByClassType(Class<T> type) {			
+		if(type == null) {return;}			
+		testExecuteByClassName(type.getName());
+	}
+	
+	public void testExecuteByClassName(String typeName) {	
+		List<String> typeNames = Arrays.asList(typeName); 
+		testExecuteByClassNames(typeNames);
+	}
+	
+	public void testExecuteByPackegeName(String packageName) {
+		
+		if(packageName == null || packageName.length() == 0) 
+			{return;}
+		
+		request = LauncherDiscoveryRequestBuilder
+				.request()
+			    .selectors(selectPackage(packageName))
+			    .build();
+		
+		printResult();
+	}
+	
+	public void testExecuteByClassNames(List<String> typeNames) {
+		
+		List<DiscoverySelector> selectors = new ArrayList<>();
+		
+		for (String typeName : typeNames) {
+			
+			if(typeName == null || typeName.length() == 0) 
+				{continue;}
+
+			selectors.add(selectClass(typeName));
+		}
+				
+		request = LauncherDiscoveryRequestBuilder
+				.request()
+			    .selectors(selectors)
 			    .build();
 		
 		printResult();

@@ -108,6 +108,7 @@ package ua.ithillel.hw21;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 public class TestRunner {
 
@@ -129,8 +130,19 @@ public class TestRunner {
 		projectTestRunner.testExecuteByClassType(
 				SimpleMathLibraryTest.class);
 		
-		projectTestRunner.testExecuteByClassType(
-				EmptyClass.class);
+		projectTestRunner.testExecuteByClassName(
+				SimpleMathLibraryTest.class.getName());
+		
+		projectTestRunner.testExecuteByClassNames(
+				Arrays.asList(
+						SimpleMathLibraryTest.class.getName()));
+		
+		projectTestRunner.testExecuteByClassTypes(
+				Arrays.asList(
+						SimpleMathLibraryTest.class));
+		
+		projectTestRunner.testExecuteByPackegeName(
+				SimpleMathLibraryTest.class.getPackageName());
 	}
 
 }
