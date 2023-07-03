@@ -31,8 +31,8 @@ import org.junit.platform.engine.DiscoverySelector;
 
 public class ProjectTestRunner {
 	
-	private LauncherDiscoveryRequest request = null;
-	private List<PrintWriter> writers = new ArrayList<>();
+	protected LauncherDiscoveryRequest request = null;
+	protected List<PrintWriter> writers = new ArrayList<>();
 	
 	public <T> void testExecuteByClassTypes(List<Class<T>> types) {			
 		if(types == null || types.size() == 0) 
@@ -100,7 +100,7 @@ public class ProjectTestRunner {
 		this.writers.remove(writer);
 	}
 
-	private void printResult() {	
+	protected void printResult() {	
 		
 		SummaryGeneratingListener listener = 
 				new SummaryGeneratingListener();
@@ -122,6 +122,13 @@ public class ProjectTestRunner {
 		long ellapsedTime = 
 				summary.getTimeFinished() - summary.getTimeStarted();
 		
+		printResultHelper(summary, ellapsedTime);
+	}
+	
+	protected void printResultHelper(
+			TestExecutionSummary summary, 
+			long ellapsedTime) {
+		
 		for (PrintWriter writer : writers) {
 		    writer.write("\nTest run finished after " + ellapsedTime + " ms\n"); 
 		    writer.write("[ " + summary.getContainersFoundCount() + " containers found ]\n");
@@ -132,6 +139,8 @@ public class ProjectTestRunner {
 		    writer.write("[ " + summary.getContainersFailedCount() + " containers failed ]\n");
 		    writer.write("[ " + summary.getTestsFoundCount() + " tests found ]\n");
 		    writer.write("[ " + summary.getTestsSkippedCount() + " tests skip ]\n");
+		    writer.write("[ " + summary.getTestsFailedCount() + " tests failed ]\n");
+		    writer.write("[ " + summary.getTestsSucceededCount() + " tests succeeded ]\n");
 		    writer.flush();  
 		    //writer.close(); 
 		}

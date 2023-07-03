@@ -108,15 +108,18 @@ package ua.ithillel.hw21;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class TestRunner {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException, URISyntaxException {
 		
 		System.out.println("hw21\n");
-	
 		
+		System.out.println("\nProjectTestRunner\n");
 		ProjectTestRunner projectTestRunner = 
 				new ProjectTestRunner();
 		
@@ -143,6 +146,22 @@ public class TestRunner {
 		
 		projectTestRunner.testExecuteByPackegeName(
 				SimpleMathLibraryTest.class.getPackageName());
+		
+		System.out.println("\nTestResultParser\n");
+		TestResultParser testResultParser = new TestResultParser();
+		
+		File starting = new File(System.getProperty("user.dir"));
+		
+		File fileToBeRead = new File(starting, "testReport.txt");	
+		testResultParser.parse(fileToBeRead);
+		System.out.println(testResultParser.getTestResult());	
+		
+		Path path =  Paths.get(fileToBeRead.getAbsolutePath());
+		testResultParser.parse(path);
+		System.out.println(testResultParser.getTestResult());
+		
+		testResultParser.parse(fileToBeRead.getAbsolutePath());
+		System.out.println(testResultParser.getTestResult());
 	}
 
 }
