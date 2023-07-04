@@ -6,6 +6,7 @@
 
 package ua.ithillel.hw20;
 
+import ua.ithillel.hw20.builder.BuilderDemo;
 import ua.ithillel.hw20.factory.FurnitureDemo;
 
 public class App {
@@ -14,6 +15,9 @@ public class App {
     	
     	System.out.println("\nhw20. Factory pattern.\n");
     	FurnitureDemo.run();
+    	
+    	System.out.println("\nhw20. Builder pattern.\n");
+    	BuilderDemo.run();
     }
     
 }
