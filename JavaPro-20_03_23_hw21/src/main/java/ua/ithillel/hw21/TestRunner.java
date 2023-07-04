@@ -162,6 +162,7 @@ public class TestRunner {
 		
 		testResultParser.parse(fileToBeRead.getAbsolutePath());
 		System.out.println(testResultParser.getTestResult());
+		
 	}
 
 }

@@ -4,5 +4,10 @@
   <artifactId>JavaPro-20_03_23_hw21</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>JavaPro-20_03_23_hw21</name>
-    
+  
+  <properties>
+     <maven.compiler.source>1.8</maven.compiler.source>
+     <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  
 </project>

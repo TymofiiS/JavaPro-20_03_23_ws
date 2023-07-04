@@ -1,17 +1,10 @@
 package ua.ithillel.hw21;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.lang.constant.Constable;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
 
 import java.io.BufferedReader;
 

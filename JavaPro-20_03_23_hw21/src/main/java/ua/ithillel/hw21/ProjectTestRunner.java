@@ -4,25 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.platform.engine.discovery.ClassNameFilter.includeClassNamePatterns;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectPackage;
 
 import java.io.PrintWriter;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import org.junit.platform.engine.FilterResult;
-import org.junit.platform.engine.TestDescriptor;
 import org.junit.platform.launcher.Launcher;
-import org.junit.platform.launcher.LauncherDiscoveryListener;
 import org.junit.platform.launcher.LauncherDiscoveryRequest;
 import org.junit.platform.launcher.LauncherSession;
-import org.junit.platform.launcher.LauncherSessionListener;
-import org.junit.platform.launcher.PostDiscoveryFilter;
-import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestPlan;
-import org.junit.platform.launcher.core.LauncherConfig;
 import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;

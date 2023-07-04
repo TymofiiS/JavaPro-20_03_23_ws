@@ -1,8 +1,8 @@
 package ua.ithillel.hw21;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SimpleListLib {
 	
@@ -14,22 +14,34 @@ public class SimpleListLib {
 		int lastOccurance = list.lastIndexOf(4);
 		if(lastOccurance < 0) {throw new RuntimeException();}
 		
-		// Return array from the last 4 to the end
-		return
-			(Integer[]) list
-				.subList(lastOccurance, list.size()-1)
-				.toArray();
+		// Check if 4 is not the last one
+		if(lastOccurance + 1 > list.size() - 1) {
+			return new Integer[0];
+		}
+		
+		// Return array from the last 4 to the end	
+		List<Integer> res = list
+				.subList(lastOccurance + 1, list.size());
+		
+    	Integer[] finalResult = new Integer[res.size()];
+    	res.toArray(finalResult);
+    			
+    	return finalResult;
 	}
 	
-	public static boolean checkContent(Integer[] input) {	
+	public static Boolean checkContent(Integer[] input) {	
 		// Convert array to list
-		List<Integer> list = Arrays.asList(input);
-		
+		List<Integer> listInit = Arrays.asList(input);
+
 		// Remove all 1 and 4;
-		list.removeAll(Collections.singleton(1));
-		list.removeAll(Collections.singleton(4));		
-		
-		// Size must be 0
-		return list.size() == 0;
+		List<Integer> list = listInit.stream()
+				.filter(x -> x != 4 && x != 1)
+				.collect(Collectors.toList());		
+
+		return list.size() == 0 && 
+				listInit.indexOf(4) >=0 && 
+				listInit.indexOf(1) >=0;
 	}
+	
+
 }
