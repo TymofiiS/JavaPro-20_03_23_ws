@@ -11,6 +11,8 @@
     <name>client</name>
     <url>http://www.example.com</url>
  
+
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
@@ -29,10 +31,16 @@
         <maven.jar>3.2.0</maven.jar>
         <maven.install>3.0.0-M1</maven.install>
     </properties>
-
-    <dependencies>
-        <!-- Dependencies -->
     
+    <dependencies>		
+        <!-- Dependencies -->
+  
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.13.0</version>
+		</dependency>        
     
         <!-- Testing dependencies-->
         <dependency>

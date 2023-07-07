@@ -19,29 +19,41 @@ public class ServerApp {
     public static HashSet<String> names = new HashSet<String>();
 
     /**
-     * The set of all the print writers for all the clients.  This
+     * The set of all the print writers for all the clients. This
      * set is kept so we can easily broadcast messages.
      */
     public static HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
 
     private static int clientCounter = 0;
     private static String namePrefix = "Client-";
+	public static String storageName = "storage";
     
     /**
      * The application main method, which just listens on a port and
      * spawns handler threads.
      */
     public static void main(String[] args) throws Exception {
-	    System.out.println("The chat server is running.");
+	    
+    	// Write some log
+    	System.out.println("The chat server is running...");
+    	
+    	// Initiate socket and listening request from a client
 	    ServerSocket listener = new ServerSocket(PORT);
+	    
+	    // Infinite loop for listening port and managing connections
 	    try {
 	        while (true) {
+	        	
+	        	// Create a new instance for accepted client request
 		        new Handler(listener.accept(), 
-		        		namePrefix+(clientCounter++))
+		        		namePrefix + (++clientCounter))
 		        	.start();
 	        }
 	    } finally {
 	        listener.close();
+	        
+	    	// Write some log
+	    	System.out.println("The chat server was stoped.");
 	    }
     }
 }
