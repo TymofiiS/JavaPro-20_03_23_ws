@@ -44,16 +44,14 @@ public class ServerApp {
 	    try {
 	        while (true) {
 	        	
-	        	// Create a new instance for accepted client request
+	        	// Create a new instance for communicate 
+	        	// with just connected client
 		        new Handler(listener.accept(), 
 		        		namePrefix + (++clientCounter))
 		        	.start();
 	        }
 	    } finally {
 	        listener.close();
-	        
-	    	// Write some log
-	    	System.out.println("The chat server was stoped.");
 	    }
     }
 }

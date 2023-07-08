@@ -18,7 +18,7 @@ import org.apache.commons.io.IOUtils;
  * loop and are responsible for a dealing with a single client
  * and broadcasting its messages.
  */
-public  class Handler extends Thread {
+public class Handler extends Thread {
     	
 	    private String name;
 	    private Socket socket;
@@ -70,45 +70,7 @@ public  class Handler extends Thread {
 	            
 	            // Process command for file transferring
                 if (input.startsWith("-file:")) {
-
-                	// Parse -file command to file name and size
-                	List<String> items = 
-                			Arrays.asList(input.split(":"));
-                	if(items.size() != 3) {continue;}
-                	
-                    String fileName = items.get(1).trim();
-                    if(fileName.length() == 0) {continue;}
-                    
-                    int fileLength = 
-                    		Integer.valueOf(items.get(2).trim());
-                    if(fileLength == 0) {continue;}
-                    
-                    // Initiate buffer for reading file from stream
-                    byte[] buffer = new byte[fileLength];
-                    
-                    // Read stream to buffer
-                    socket.getInputStream().read(
-                    		buffer, 0, fileLength);
-
-                    // Ensure storage path existing
-                    Path path = Paths.get(
-                    		System.getProperty("user.dir"), 
-                    		ServerApp.storageName);
-                    File file = path.toFile();
-                    if (!file.exists()) {file.mkdirs();}
-                    
-                    // Write buffer into file on drive
-                    IOUtils.write(buffer, 
-                    		new FileOutputStream(
-                    				file.getAbsolutePath() + "\\" + fileName));
-                    
-                    // Write some log
-                    System.out.println(
-                    		"File: " + fileName + " saved to storage.");
-                    
-                    // Send confirmation to user
-                    out.println("[SERVER] File transfer OK");
-                    
+                	fileCommandProcessor(input);              
                     continue;
                 }
                 
@@ -124,7 +86,7 @@ public  class Handler extends Thread {
 	        	ServerApp.names.remove(name);
 	        	
 	        	// Write some log
-	        	System.out.println(name + " removed from list");
+	        	System.out.println(name + " removed from lists");
 	        	
 	        	// Inform all participants
 	        	broadCastMessage(name + " disconnected");
@@ -135,22 +97,94 @@ public  class Handler extends Thread {
 	        try {
 	            socket.close();
 	        } catch (IOException e) {
+	        	e.printStackTrace();
 	        }
         }
     }
     
-    private void broadCastMessage(String message) {
+    public int broadCastMessage(String message) {
         
     	String entireMessage = 
     			"[SERVER] " + name + ": " + message;
     	
-    	for (PrintWriter writer : ServerApp.writers) {
-        	if(writer == out) {continue;}
-        	writer.println(entireMessage);
-        }
+    	// Send message to all participants but current
+    	int counter = 0;
+    	try {
+        	for (PrintWriter writer : ServerApp.writers) {
+            	if(writer == out) {continue;}
+            	writer.println(entireMessage);
+            	counter++;
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+			return counter;
+		}
+ 	
+    	// Write some log
+    	System.out.println(
+    			entireMessage + " was sent for " + 
+    					counter + " client(s)");
     	
-    	System.out.println(entireMessage);
+    	return counter;
     }
     
+    public int fileCommandProcessor(
+    		String input) {
+    	
+    	// Parse -file command to file name and size
+    	List<String> items = 
+    			Arrays.asList(input.split(":"));
+    	if(items.size() != 3) {return 2;}
+    	
+        String fileName = items.get(1).trim();
+        if(fileName.length() == 0) {return 2;}
+        
+        int fileLength = 
+        		Integer.valueOf(items.get(2).trim());
+        if(fileLength == 0) {return 2;}
+        
+        // Initiate buffer for reading file from stream
+        byte[] buffer = new byte[fileLength];
+        
+        // Read stream to buffer
+		try {
+			socket.getInputStream().read(
+					buffer, 0, fileLength);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 1;
+		}
+     
+        // Check if was read at least on byte
+        int sum = 0;
+        for (byte b : buffer) {sum |= b;}
+        if(sum == 0) {return 1;}
+
+        // Ensure storage path existing
+        Path path = Paths.get(
+        		System.getProperty("user.dir"), 
+        		ServerApp.storageName);
+        File file = path.toFile();
+        if (!file.exists()) {file.mkdirs();}
+        
+        // Write buffer into file on drive
+        try {
+			IOUtils.write(buffer, 
+					new FileOutputStream(
+							file.getAbsolutePath() + "\\" + fileName));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return 1;
+		}
+        
+        // Write some log
+        System.out.println(
+        		"File: " + fileName + " saved to storage.");
+        
+        // Send confirmation to user
+        out.println("[SERVER] File transfer OK");
+        
+    	return 0;
+    } 
 }
 
