@@ -1,0 +1,11 @@
+Download tomcat.
+
+Create a project (you can use the archetype, as in the lesson)
+
+Create a HelloServlet Servlet. In doGet return the text of your choice.
+
+Create a LoggingFilter that will display information about the request:
+path, headings, and other information you find.
+Set up a filter for any request.
+
+You can configure servlets and filters in web.xml or with annotations.
