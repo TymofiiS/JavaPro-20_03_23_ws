@@ -10,7 +10,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import com.journaldev.hibernate.model.Employee;
-import com.journaldev.hibernate.model.Empl;
 
 public class HibernateUtil {
 
@@ -31,7 +30,6 @@ public class HibernateUtil {
 			configuration.setProperties(props);
 			
 			configuration.addAnnotatedClass(Employee.class);
-			configuration.addAnnotatedClass(Empl.class);
 			
 			ServiceRegistry serviceRegistry = 
 					new StandardServiceRegistryBuilder()

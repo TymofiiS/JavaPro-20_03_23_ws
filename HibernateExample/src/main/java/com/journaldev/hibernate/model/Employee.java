@@ -16,6 +16,8 @@ import javax.persistence.UniqueConstraint;
 	   uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
 public class Employee {
 	
+	public static final String EMPLOYEE_TABLE_NAME = "Employee";
+	
 	public Employee(String name, String role, Date insertTime) {
 		this.name = name;
 		this.role = role;
