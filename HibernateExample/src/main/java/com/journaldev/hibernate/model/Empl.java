@@ -1,7 +1,5 @@
 package com.journaldev.hibernate.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,19 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-
 @Entity
-@Table(name="Employee", 
+@Table(name="Empl", 
 	   uniqueConstraints={@UniqueConstraint(columnNames={"ID"})})
-public class Employee {
+public class Empl {
 	
-	public Employee(String name, String role, Date insertTime) {
+	public Empl(String name) {
 		this.name = name;
-		this.role = role;
-		this.insertTime = insertTime;
 	}
 	
-	public Employee() {
+	public Empl() {
 	}
 	
 	@Id
@@ -32,41 +27,21 @@ public class Employee {
 	
 	@Column(name="NAME", length=20, nullable=true)
 	private String name;
-	
-	@Column(name="ROLE", length=20, nullable=true)
-	private String role;
-	
-	@Column(name="insert_time", nullable=true)
-	private Date insertTime;
-	
-	
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", role=" + role + ", insertTime=" + insertTime + "]";
-	}
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	public Date getInsertTime() {
-		return insertTime;
-	}
-	public void setInsertTime(Date insertTime) {
-		this.insertTime = insertTime;
-	}
+
 }

@@ -2,18 +2,21 @@ package com.journaldev.hibernate.util;
 
 import java.util.Properties;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import com.journaldev.hibernate.model.Employee;
+import com.journaldev.hibernate.model.Empl;
 
 public class HibernateUtil {
 
-	private static SessionFactory sessionJavaConfigFactory;
+	private static  SessionFactory sessionFactory;
 
-    private static SessionFactory buildSessionJavaConfigFactory() {
+    private static SessionFactory buildSessionFactory() {
     	try {
 	    	Configuration configuration = new Configuration();
 			
@@ -28,6 +31,7 @@ public class HibernateUtil {
 			configuration.setProperties(props);
 			
 			configuration.addAnnotatedClass(Employee.class);
+			configuration.addAnnotatedClass(Empl.class);
 			
 			ServiceRegistry serviceRegistry = 
 					new StandardServiceRegistryBuilder()
@@ -46,10 +50,57 @@ public class HibernateUtil {
         }
 	}
     	
-	public static SessionFactory getSessionJavaConfigFactory() {
-		return sessionJavaConfigFactory == null
-			?sessionJavaConfigFactory = buildSessionJavaConfigFactory()
-			:sessionJavaConfigFactory;
+	private static SessionFactory getSessionFactory() {
+		try {
+			return sessionFactory == null
+				?sessionFactory = buildSessionFactory()
+				:sessionFactory;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
     }
 	
+    public static void closeSessionFactory() {
+    	if(sessionFactory == null) {return;}
+    	
+    	sessionFactory.close();
+    }
+	
+	
+    private  Session currentSession;
+    
+    private  Transaction currentTransaction;
+ 
+    public Session openCurrentSession() {
+    	getSessionFactory();
+    	if(sessionFactory == null) {return null;}
+    	
+        currentSession = sessionFactory.openSession();
+        return currentSession;
+    }
+ 
+    public Session openCurrentSessionwithTransaction() {
+    	getSessionFactory();
+    	if(sessionFactory == null) {return null;}
+    	
+        currentSession = sessionFactory.openSession();
+        currentTransaction = currentSession.beginTransaction();
+        return currentSession;
+    }
+     
+    public void closeCurrentSession() {
+    	if(currentSession == null) {return;}
+    	
+        currentSession.close();
+    }
+     
+    public void closeCurrentSessionwithTransaction() {
+    	if(currentSession == null) {return;}
+    	if(currentTransaction == null) {return;}
+    	
+        currentTransaction.commit();
+        currentSession.close();
+    }
+    	
 }
