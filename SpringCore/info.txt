@@ -1,0 +1,38 @@
+2023-08-15 22:53:20,770 INFO [main] [App.java#main:34] -- Without Spring
+2023-08-15 22:53:20,775 INFO [main] [BaseStorage.java#print:19] -- ProductRepository singleton
+2023-08-15 22:53:20,776 INFO [main] [BaseStorage.java#print:21] -- Product [id=1, name=Product0, price=0.0]
+2023-08-15 22:53:20,777 INFO [main] [BaseStorage.java#print:21] -- Product [id=2, name=Product1, price=1.0]
+2023-08-15 22:53:20,777 INFO [main] [BaseStorage.java#print:21] -- Product [id=3, name=Product2, price=2.0]
+2023-08-15 22:53:20,778 INFO [main] [BaseStorage.java#print:21] -- Product [id=4, name=Product3, price=3.0]
+2023-08-15 22:53:20,778 INFO [main] [BaseStorage.java#print:21] -- Product [id=5, name=Product4, price=4.0]
+2023-08-15 22:53:20,778 INFO [main] [BaseStorage.java#print:19] -- Cart1
+2023-08-15 22:53:20,782 INFO [main] [BaseStorage.java#print:21] -- Product [id=2, name=Product1, price=1.0]
+2023-08-15 22:53:20,782 INFO [main] [BaseStorage.java#print:21] -- Product [id=4, name=Product3, price=3.0]
+2023-08-15 22:53:20,782 INFO [main] [BaseStorage.java#print:19] -- ProductRepository singleton
+2023-08-15 22:53:20,782 INFO [main] [BaseStorage.java#print:21] -- Product [id=1, name=Product0, price=0.0]
+2023-08-15 22:53:20,782 INFO [main] [BaseStorage.java#print:21] -- Product [id=2, name=Product1, price=1.0]
+2023-08-15 22:53:20,782 INFO [main] [BaseStorage.java#print:21] -- Product [id=3, name=Product2, price=2.0]
+2023-08-15 22:53:20,783 INFO [main] [BaseStorage.java#print:21] -- Product [id=4, name=Product3, price=3.0]
+2023-08-15 22:53:20,783 INFO [main] [BaseStorage.java#print:21] -- Product [id=5, name=Product4, price=4.0]
+2023-08-15 22:53:20,783 INFO [main] [BaseStorage.java#print:19] -- Cart2
+2023-08-15 22:53:20,783 INFO [main] [BaseStorage.java#print:21] -- Product [id=1, name=Product0, price=0.0]
+2023-08-15 22:53:20,783 INFO [main] [BaseStorage.java#print:21] -- Product [id=5, name=Product4, price=4.0]
+2023-08-15 22:53:20,784 INFO [main] [App.java#main:59] -- With Spring
+2023-08-15 22:53:21,051 INFO [main] [BaseStorage.java#print:19] -- ProductRepository singleton
+2023-08-15 22:53:21,051 INFO [main] [BaseStorage.java#print:21] -- Product [id=6, name=Product0, price=0.0]
+2023-08-15 22:53:21,052 INFO [main] [BaseStorage.java#print:21] -- Product [id=7, name=Product1, price=1.0]
+2023-08-15 22:53:21,052 INFO [main] [BaseStorage.java#print:21] -- Product [id=8, name=Product2, price=2.0]
+2023-08-15 22:53:21,052 INFO [main] [BaseStorage.java#print:21] -- Product [id=9, name=Product3, price=3.0]
+2023-08-15 22:53:21,052 INFO [main] [BaseStorage.java#print:21] -- Product [id=10, name=Product4, price=4.0]
+2023-08-15 22:53:21,052 INFO [main] [BaseStorage.java#print:19] -- Cart3
+2023-08-15 22:53:21,052 INFO [main] [BaseStorage.java#print:21] -- Product [id=7, name=Product1, price=1.0]
+2023-08-15 22:53:21,053 INFO [main] [BaseStorage.java#print:21] -- Product [id=9, name=Product3, price=3.0]
+2023-08-15 22:53:21,053 INFO [main] [BaseStorage.java#print:19] -- ProductRepository singleton
+2023-08-15 22:53:21,053 INFO [main] [BaseStorage.java#print:21] -- Product [id=6, name=Product0, price=0.0]
+2023-08-15 22:53:21,053 INFO [main] [BaseStorage.java#print:21] -- Product [id=7, name=Product1, price=1.0]
+2023-08-15 22:53:21,053 INFO [main] [BaseStorage.java#print:21] -- Product [id=8, name=Product2, price=2.0]
+2023-08-15 22:53:21,053 INFO [main] [BaseStorage.java#print:21] -- Product [id=9, name=Product3, price=3.0]
+2023-08-15 22:53:21,053 INFO [main] [BaseStorage.java#print:21] -- Product [id=10, name=Product4, price=4.0]
+2023-08-15 22:53:21,053 INFO [main] [BaseStorage.java#print:19] -- Cart4
+2023-08-15 22:53:21,054 INFO [main] [BaseStorage.java#print:21] -- Product [id=6, name=Product0, price=0.0]
+2023-08-15 22:53:21,054 INFO [main] [BaseStorage.java#print:21] -- Product [id=10, name=Product4, price=4.0]
