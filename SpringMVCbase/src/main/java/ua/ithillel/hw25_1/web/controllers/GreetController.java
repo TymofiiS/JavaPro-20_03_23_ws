@@ -12,7 +12,7 @@ public class GreetController {
 
 	public static final Logger logger = 
 			LoggerFactory.getLogger(GreetController.class);
-	
+
 	@ResponseBody
 	@RequestMapping(
 			value = "/greet", 
