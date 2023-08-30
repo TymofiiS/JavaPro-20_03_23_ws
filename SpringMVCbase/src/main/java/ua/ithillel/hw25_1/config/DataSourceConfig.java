@@ -9,10 +9,13 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.JdbcTransactionManager;
 import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
+@EnableTransactionManagement
 public class DataSourceConfig {
 
 	@Bean
@@ -23,8 +26,6 @@ public class DataSourceConfig {
         config.setUsername("root");
         config.setPassword("hjIt64-JkeUY");  
         config.setDriverClassName("com.mysql.jdbc.Driver");
-
-        //config.setDataSourceClassName("org.springframework.jdbc.datasource.DriverManagerDataSource");
 
         return new HikariDataSource(config);
 	}
@@ -43,10 +44,9 @@ public class DataSourceConfig {
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
         return new NamedParameterJdbcTemplate(dataSource);
     }
-
+  
     @Bean
     public TransactionManager transactionManager(DataSource dataSource) {
         return new JdbcTransactionManager(dataSource);
-    }
-	
+    }  
 }
