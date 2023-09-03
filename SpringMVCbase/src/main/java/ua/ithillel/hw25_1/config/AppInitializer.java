@@ -1,8 +1,10 @@
 package ua.ithillel.hw25_1.config;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import org.springframework.web.servlet.support
+	.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class AppInitializer 
+	extends AbstractAnnotationConfigDispatcherServletInitializer {
 	
     @Override
     protected Class<?>[] getRootConfigClasses()
