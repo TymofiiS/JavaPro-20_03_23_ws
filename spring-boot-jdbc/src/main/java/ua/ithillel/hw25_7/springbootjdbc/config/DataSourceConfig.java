@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@EnableJdbcRepositories
+@EnableJdbcRepositories("ua.ithillel.hw25_7.springbootjdbc.repositories")
 public class DataSourceConfig extends AbstractJdbcConfiguration{
 	
 	@Bean
@@ -24,6 +24,7 @@ public class DataSourceConfig extends AbstractJdbcConfiguration{
 		return new JdbcTransactionManager(dataSource);
 	}
 	
+	@Bean
 	public NamedParameterJdbcOperations namedParameterJdbcOperations(DataSource dataSource) {
 		return new NamedParameterJdbcTemplate(dataSource);
 	}

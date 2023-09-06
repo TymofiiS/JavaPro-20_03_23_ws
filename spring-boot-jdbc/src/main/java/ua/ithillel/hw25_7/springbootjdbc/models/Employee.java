@@ -1,6 +1,10 @@
-package ua.ithillel.hw25_6.springbootfirst.models;
+package ua.ithillel.hw25_7.springbootjdbc.models;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 
+@Table("employee")
 public class Employee {
 
 	@Override
@@ -8,13 +12,14 @@ public class Employee {
 		return "Employee [id=" + id + ", name=" + name + ", role=" + role + "]";
 	}
 	
-	private int id;
+	@Id
+	private Long id;
 	
 	private String name;
 	
 	private String role;
 	
-	public Employee(int id, String name, String role) {
+	public Employee(Long id, String name, String role) {
 		this.id = id;
 		this.name = name;
 		this.role = role;
@@ -23,11 +28,11 @@ public class Employee {
 	public Employee() {
 	}
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(Long i) {
+		this.id = i;
 	}
 	public String getName() {
 		return name;

@@ -1,19 +1,19 @@
-package ua.ithillel.hw25_6.springbootfirst.models;
+package ua.ithillel.hw25_7.springbootjdbc.models;
 
 
 public class EmployeeDto {
 
-	private int id;
+	private Long id;
 	
 	private String name;
 	
 	private String role;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -33,15 +33,13 @@ public class EmployeeDto {
 		this.role = role;
 	}
 
-	public EmployeeDto(int id, String name, String role) {
-		super();
+	public EmployeeDto(Long id, String name, String role) {
 		this.id = id;
 		this.name = name;
 		this.role = role;
 	}
 
 	public EmployeeDto() {
-		super();
 	}
 
 	@Override

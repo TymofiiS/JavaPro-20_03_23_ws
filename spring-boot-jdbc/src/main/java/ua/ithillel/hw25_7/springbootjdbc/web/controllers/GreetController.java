@@ -1,4 +1,4 @@
-package ua.ithillel.hw25_6.springbootfirst.web.controllers;
+package ua.ithillel.hw25_7.springbootjdbc.web.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

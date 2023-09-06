@@ -1,4 +1,4 @@
-package ua.ithillel.hw25_6.springbootfirst.dao;
+package ua.ithillel.hw25_7.springbootjdbc.dao;
 
 import java.util.List;
 import javax.sql.DataSource;
@@ -10,7 +10,9 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import ua.ithillel.hw25_6.springbootfirst.models.Employee;
+import ua.ithillel.hw25_7.springbootjdbc.models.Employee;
+
+
 
 
 @Repository
@@ -36,12 +38,14 @@ public class EmployeeDao  {
 				new BeanPropertyRowMapper<>(Employee.class));
 	}
 
-	public void save(Employee emp) {	
+	public Employee save(Employee emp) {	
 		
 		SqlParameterSource parameters = new MapSqlParameterSource()
 				.addValue("name", emp.getName())
 				.addValue("role", emp.getRole());
 		Number newId = simpleJdbcInsert.executeAndReturnKey(parameters);
-		emp.setId(newId.intValue());		
+		emp.setId(newId.longValue());		
+		
+		return emp;
 	}
 }
