@@ -1,0 +1,6 @@
+spring:
+ datasource:
+  url: jdbc:mysql://localhost/hibernate
+  username: root
+  password: hjIt64-JkeUY
+  driver-class-name: com.mysql.jdbc.Driver
