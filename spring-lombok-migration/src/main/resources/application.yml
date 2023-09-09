@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/spring-lombok-migration
+    username: root
+    password: hjIt64-JkeUY
+  flyway:
+    enabled: true
+    validate-on-migrate: true
