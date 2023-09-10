@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @EnableTransactionManagement
 @EnableJdbcRepositories("ua.ithillel.hw25.persistence.repository")
-public class DataSourceConfig {
+public class DataSourceConfig extends AbstractJdbcConfiguration {
 	
 	@Bean
 	public TransactionManager transactionManager(DataSource dataSource) {

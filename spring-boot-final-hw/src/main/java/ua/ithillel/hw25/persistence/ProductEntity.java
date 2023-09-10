@@ -11,5 +11,5 @@ public class ProductEntity {
 	@Id
 	private Long id;
 	private String name;
-	private Double cost;	
+	private Double cost;
 }
