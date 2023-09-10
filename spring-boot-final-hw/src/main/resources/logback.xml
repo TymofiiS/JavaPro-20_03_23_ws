@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+
+<configuration debug="true" scan="true" scanPeriod="15 seconds">
+	
+  <include resource="org/springframework/boot/logging/logback/base.xml"/>
+	
+  <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
+  <import class="ch.qos.logback.core.ConsoleAppender"/>
+  <import class="ch.qos.logback.core.rolling.RollingFileAppender"/>
+  <import class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy"/>
+
+  <property name="LOG_DIR" value="C:/Users/Tymofii/Downloads/Logs" /> 
+  
+  <appender name="FILE" class="RollingFileAppender">
+    <file>${LOG_DIR}/info.log</file>
+    <rollingPolicy class="SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_DIR}/info-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+      <maxFileSize>1MB</maxFileSize>
+    </rollingPolicy>
+    <encoder class="PatternLayoutEncoder">
+      <pattern>%date %level [%thread] [%file#%method:%line] -%kvp- %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="FILE_ERR" class="RollingFileAppender">
+    <file>${LOG_DIR}/err.log</file>
+    <rollingPolicy class="SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_DIR}/err-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+      <maxFileSize>1MB</maxFileSize>
+    </rollingPolicy>
+    <encoder class="PatternLayoutEncoder">
+      <pattern>%date %level [%thread] [%file#%method:%line] -%kvp- %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="STDOUT" class="ConsoleAppender">
+    <encoder class="PatternLayoutEncoder">
+      <pattern>[%file#%method:%line] -> %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <logger name="ERR" level="ERROR" additivity="false">
+    <appender-ref ref="FILE_ERR"/>
+  </logger>
+
+  <root level="INFO">
+	<appender-ref ref="FILE"/>
+    <appender-ref ref="STDOUT"/>
+  </root>
+</configuration>

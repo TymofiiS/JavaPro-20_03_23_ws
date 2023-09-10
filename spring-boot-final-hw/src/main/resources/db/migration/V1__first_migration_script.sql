@@ -1,15 +1,16 @@
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `date` DATETIME NOT NULL,
+  `cost` FLOAT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `products` (
-  ` id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `cost` FLOAT NOT NULL,
-  PRIMARY KEY (` id`),
+  PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
 ENGINE = InnoDB;
 
@@ -26,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `order_has_products` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_orders_has_products_products1`
     FOREIGN KEY (`products_ id`)
-    REFERENCES `products` (` id`)
+    REFERENCES `products` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

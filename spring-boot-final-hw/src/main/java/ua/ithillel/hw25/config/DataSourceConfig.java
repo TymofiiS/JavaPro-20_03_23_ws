@@ -1,4 +1,4 @@
-package ua.ithillel.hw25_9.springlombokmigration.config;
+package ua.ithillel.hw25.config;
 
 import javax.sql.DataSource;
 
@@ -10,10 +10,12 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.JdbcTransactionManager;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
+@EnableWebMvc
 @EnableTransactionManagement
-@EnableJdbcRepositories("ua.ithillel.hw25_9.springlombokmigration.persistence.repository")
+@EnableJdbcRepositories("ua.ithillel.hw25.persistence.repository")
 public class DataSourceConfig {
 	
 	@Bean
