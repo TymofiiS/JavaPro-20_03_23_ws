@@ -8,4 +8,6 @@ import ua.ithillel.hw25.persistence.OrderEntity;
 @Repository
 public interface OrderEntityRepository 
 	extends ListCrudRepository<OrderEntity, Long> {
+	
+		
 }

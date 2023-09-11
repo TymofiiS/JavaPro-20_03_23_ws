@@ -1,25 +1,31 @@
 package ua.ithillel.hw25.persistence;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Timestamp;
+import java.util.*;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
-@Table("orders")
+@Table("ORDER")
 @Data
 public class OrderEntity {
 	@Id
-	private Long id;
-
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-	private Date date;
-	
-	private Double cost;
-	
-	private List<ProductEntity> products;
+	@Column("ORDER_ID")
+	private Long orderId;
+	@Column("ORDER_DATE")
+	private Timestamp date;
+	@Column("ORDER_COST")
+	private Double cost=0.0;
+	@MappedCollection(idColumn = "ORDER_ID")
+	private Set<ProductEntityRef> products = new HashSet<>();
+	  
+	 public void addProduct(ProductEntity product) {
+		 if(product == null) {return;}
+		 this.cost+=product.getCost();
+	     products.add(new ProductEntityRef(product.getProductId()));
+	 }
 }

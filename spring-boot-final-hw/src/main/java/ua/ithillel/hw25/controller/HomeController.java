@@ -8,9 +8,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/")
 public class HomeController {
 	
-	@GetMapping
+	  @GetMapping
 	public String home() {
-		return "Welcome";
+		  String s = 
+				"""
+		  		Welcome 
+		  		to get all orders: /orders 	  		
+		  		to get an order by id: /orders/{id} 	  		
+		  		to add order: /orders/add 
+			  		with data: 
+			  		 {
+				        "products": [
+				            {
+				                "name": "Product_AAA",
+				                "cost": 11.11
+				            },
+				            {
+				                "name": "Product_BBB",
+				                "cost": 22.22
+				            }
+			  		    ]
+			  		}
+		  		""";
+		return s;
 	}
 	
 	@GetMapping("ping")
