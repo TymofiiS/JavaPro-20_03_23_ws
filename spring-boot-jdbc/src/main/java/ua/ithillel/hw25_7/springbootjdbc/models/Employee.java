@@ -3,21 +3,19 @@ package ua.ithillel.hw25_7.springbootjdbc.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-
 @Table("employee")
-public class Employee {
-
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", role=" + role + "]";
-	}
-	
+public class Employee {	
 	@Id
 	private Long id;
 	
 	private String name;
 	
 	private String role;
+	
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", role=" + role + "]";
+	}
 	
 	public Employee(Long id, String name, String role) {
 		this.id = id;
