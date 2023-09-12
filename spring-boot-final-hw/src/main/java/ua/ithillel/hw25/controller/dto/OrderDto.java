@@ -1,4 +1,4 @@
-package ua.ithillel.hw25.controller;
+package ua.ithillel.hw25.controller.dto;
 
 import java.util.List;
 

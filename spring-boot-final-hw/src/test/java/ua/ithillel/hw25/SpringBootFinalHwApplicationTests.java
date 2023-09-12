@@ -1,10 +1,9 @@
 package ua.ithillel.hw25;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -13,15 +12,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import ua.ithillel.hw25.controller.OrderDto;
-import ua.ithillel.hw25.controller.ProductDto;
-import ua.ithillel.hw25.helpers.OrderMapper;
-import ua.ithillel.hw25.helpers.ProductMapper;
-import ua.ithillel.hw25.persistence.OrderEntity;
-import ua.ithillel.hw25.persistence.ProductEntity;
-import ua.ithillel.hw25.persistence.service.OrderEntityService;
-import ua.ithillel.hw25.persistence.service.ProductEntityService;
+import ua.ithillel.hw25.controller.dto.OrderDto;
+import ua.ithillel.hw25.controller.dto.ProductDto;
+import ua.ithillel.hw25.controller.mapper.OrderMapper;
+import ua.ithillel.hw25.controller.mapper.ProductMapper;
+import ua.ithillel.hw25.persistence.entity.OrderEntity;
+import ua.ithillel.hw25.persistence.entity.ProductEntity;
+import ua.ithillel.hw25.service.OrderEntityService;
+import ua.ithillel.hw25.service.ProductEntityService;
 
 @SpringBootTest
 class SpringBootFinalHwApplicationTests {
@@ -31,6 +32,27 @@ class SpringBootFinalHwApplicationTests {
 	
 	  @Autowired
 	  private ProductEntityService productEntityService;
+	  
+	  @Test
+	  @DisplayName("get-orderDto-by-id-test")
+	  void getOrderDtoByIdTest() {
+		  // Set id
+		  Long orderId = (long) 25;
+		  
+			// Find OrderEntity by id
+			Optional<OrderEntity> result = orderEntityService.getById(orderId);
+			
+			 // Read products from DB linked to this order
+			 List<ProductEntity> allProductEntities = 
+					 productEntityService.allByOrderId(orderId);
+			 
+			 allProductEntities.forEach(b -> System.err.println(b));
+			
+			 // Convert OrderEntity to OrderDto
+			OrderDto orderDto = OrderMapper.toDto(result.get(), allProductEntities);
+			
+			System.err.println(orderDto);
+	  }
 	  
 	  @Test
 	  @DisplayName("save-income-order-test")

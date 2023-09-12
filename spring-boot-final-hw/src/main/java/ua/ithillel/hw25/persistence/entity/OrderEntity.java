@@ -1,4 +1,4 @@
-package ua.ithillel.hw25.persistence;
+package ua.ithillel.hw25.persistence.entity;
 
 import java.sql.Timestamp;
 import java.util.*;

@@ -1,10 +1,10 @@
-package ua.ithillel.hw25.controller;
+package ua.ithillel.hw25.controller.dto;
 
 import lombok.Data;
 
 @Data
 public class ProductDto {
-	private Long id;
+	private Long productId;
 	private String name;
 	private Double cost;
 }

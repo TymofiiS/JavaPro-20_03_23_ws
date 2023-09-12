@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import ua.ithillel.hw25.helpers.OrderMapper;
-import ua.ithillel.hw25.helpers.ProductMapper;
-import ua.ithillel.hw25.persistence.OrderEntity;
-import ua.ithillel.hw25.persistence.ProductEntity;
-import ua.ithillel.hw25.persistence.service.OrderEntityService;
-import ua.ithillel.hw25.persistence.service.ProductEntityService;
+import ua.ithillel.hw25.controller.dto.OrderDto;
+import ua.ithillel.hw25.controller.dto.ProductDto;
+import ua.ithillel.hw25.controller.mapper.OrderMapper;
+import ua.ithillel.hw25.controller.mapper.ProductMapper;
+import ua.ithillel.hw25.persistence.entity.OrderEntity;
+import ua.ithillel.hw25.persistence.entity.ProductEntity;
+import ua.ithillel.hw25.service.OrderEntityService;
+import ua.ithillel.hw25.service.ProductEntityService;
 
 @RestController
 @RequestMapping(value = "/orders")
@@ -102,12 +104,13 @@ public class OrderController {
 			            .body("Not found");
 			}
 			
-			 // Read all products from DB
+			 // Read products from DB linked to this order
 			 List<ProductEntity> allProductEntities = 
-					 productEntityService.findAll();
+					 productEntityService.allByOrderId(id);
 			
 			 // Convert OrderEntity to OrderDto
-			OrderDto orderDto = OrderMapper.toDto(result.get(), allProductEntities);
+			OrderDto orderDto = 
+					OrderMapper.toDto(result.get(), allProductEntities);
 			
 			return ResponseEntity.ok(orderDto);
 		}

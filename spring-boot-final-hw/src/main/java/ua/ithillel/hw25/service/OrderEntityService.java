@@ -1,4 +1,4 @@
-package ua.ithillel.hw25.persistence.service;
+package ua.ithillel.hw25.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ua.ithillel.hw25.persistence.OrderEntity;
+import ua.ithillel.hw25.persistence.entity.OrderEntity;
 import ua.ithillel.hw25.persistence.repository.OrderEntityRepository;
 
 @Service

@@ -1,4 +1,4 @@
-package ua.ithillel.hw25.helpers;
+package ua.ithillel.hw25.controller.mapper;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -6,15 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.security.auth.x500.X500Principal;
-
-import ua.ithillel.hw25.controller.OrderDto;
-import ua.ithillel.hw25.controller.ProductDto;
-import ua.ithillel.hw25.persistence.OrderEntity;
-import ua.ithillel.hw25.persistence.ProductEntity;
-import ua.ithillel.hw25.persistence.ProductEntityRef;
+import ua.ithillel.hw25.controller.dto.OrderDto;
+import ua.ithillel.hw25.controller.dto.ProductDto;
+import ua.ithillel.hw25.persistence.entity.OrderEntity;
+import ua.ithillel.hw25.persistence.entity.ProductEntity;
+import ua.ithillel.hw25.persistence.entity.ProductEntityRef;
 
 public class OrderMapper {
 	

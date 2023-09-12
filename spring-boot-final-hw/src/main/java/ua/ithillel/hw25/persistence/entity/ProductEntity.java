@@ -1,4 +1,4 @@
-package ua.ithillel.hw25.persistence;
+package ua.ithillel.hw25.persistence.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
